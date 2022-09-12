@@ -1,6 +1,5 @@
 package com.zti.avlplan.AVLSpreadSheet;
 
-import com.zti.avlplan.AVLItem.Models.AVLTimeline;
 import com.zti.avlplan.AVLItem.Repositories.AVLTimelineRepository;
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheet;
 import com.zti.avlplan.AVLSpreadSheet.Repositories.AVLSpreadSheetRepository;
@@ -13,10 +12,12 @@ import java.util.Optional;
 @Service
 public class AVLSpreadSheetService {
     final private AVLSpreadSheetRepository avlSpreadSheetRepository;
+    final private AVLTimelineRepository avlTimelineRepository;
 
     @Autowired
-    public AVLSpreadSheetService(AVLSpreadSheetRepository avlSpreadSheetRepository) {
+    public AVLSpreadSheetService(AVLSpreadSheetRepository avlSpreadSheetRepository, AVLTimelineRepository avlTimelineRepository) {
         this.avlSpreadSheetRepository = avlSpreadSheetRepository;
+        this.avlTimelineRepository = avlTimelineRepository;
     }
 
     public List<AVLSpreadSheet> getAVLSpreadSheets(){
@@ -28,6 +29,12 @@ public class AVLSpreadSheetService {
     }
 
     public void addNewAvlSpreadSheet(AVLSpreadSheet avlSpreadSheet) {
+        avlSpreadSheetRepository.save(avlSpreadSheet);
+    }
+
+    public void generateNewAvlSpreadSheet() {
+        var avlTimelines = List.of(avlTimelineRepository.findById("631ea77bf6dc7f112c58a891").get(), avlTimelineRepository.findById("631ea885f6dc7f112c58a893").get());
+        var avlSpreadSheet = new AVLSpreadSheet(avlTimelines);
         avlSpreadSheetRepository.save(avlSpreadSheet);
     }
 }

@@ -19,7 +19,7 @@ public class AVLSpreadSheetController {
         this.avlSpreadSheetService = avlSpreadSheetService;
     }
 
-    @GetMapping("/spreadsheet")
+    @GetMapping("/spreadsheets")
     public List<AVLSpreadSheet> getAVLSpreadSheets(){
         return avlSpreadSheetService.getAVLSpreadSheets();
     }
@@ -33,9 +33,14 @@ public class AVLSpreadSheetController {
         return spreadSheet;
     }
 
+    @GetMapping("/add-spreadsheet")
+    public String getAVLSpreadSheetById(){
+        avlSpreadSheetService.generateNewAvlSpreadSheet();
+        return "Done";
+    }
+
     @PostMapping("/spreadsheet")
     public void postSpreadSheet(@RequestBody AVLSpreadSheet avlSpreadSheet){
         avlSpreadSheetService.addNewAvlSpreadSheet(avlSpreadSheet);
     }
-
 }
