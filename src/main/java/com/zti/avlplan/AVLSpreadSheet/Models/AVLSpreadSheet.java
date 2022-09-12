@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.zti.avlplan.AVLItem.Models.AVLSpan;
 import com.zti.avlplan.AVLItem.Models.AVLTimeline;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class AVLSpreadSheet {
     @Id
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
+    @DocumentReference
     private List<AVLTimeline> AVLTimelines;
 
     public AVLSpreadSheet(List<AVLTimeline> AVLTimelines) {
