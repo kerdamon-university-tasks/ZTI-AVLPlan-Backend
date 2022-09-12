@@ -1,7 +1,7 @@
-package com.zti.avlplan.AVLItem;
+package com.zti.avlplan.AVLTimeline;
 
-import com.zti.avlplan.AVLItem.Models.AVLTimeline;
-import com.zti.avlplan.AVLItem.Repositories.AVLTimelineRepository;
+import com.zti.avlplan.AVLTimeline.Models.AVLTimeline;
+import com.zti.avlplan.AVLTimeline.Repositories.AVLTimelineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AVLItemService {
+public class AVLTimelineService {
     final private AVLTimelineRepository avlTimelineRepository;
 
     @Autowired
-    public AVLItemService(AVLTimelineRepository avlTimelineRepository) {
+    public AVLTimelineService(AVLTimelineRepository avlTimelineRepository) {
         this.avlTimelineRepository = avlTimelineRepository;
     }
 

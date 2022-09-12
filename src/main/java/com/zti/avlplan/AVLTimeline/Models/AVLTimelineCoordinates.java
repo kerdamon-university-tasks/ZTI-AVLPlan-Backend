@@ -1,4 +1,4 @@
-package com.zti.avlplan.AVLItem.Models;
+package com.zti.avlplan.AVLTimeline.Models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;

@@ -1,8 +1,7 @@
 package com.zti.avlplan.AVLSpreadSheet.Models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.zti.avlplan.AVLItem.Models.AVLSpan;
-import com.zti.avlplan.AVLItem.Models.AVLTimeline;
+import com.zti.avlplan.AVLTimeline.Models.AVLTimeline;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 

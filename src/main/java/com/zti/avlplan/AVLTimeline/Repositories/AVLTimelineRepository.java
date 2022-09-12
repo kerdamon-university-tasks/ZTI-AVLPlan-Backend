@@ -1,6 +1,6 @@
-package com.zti.avlplan.AVLItem.Repositories;
+package com.zti.avlplan.AVLTimeline.Repositories;
 
-import com.zti.avlplan.AVLItem.Models.AVLTimeline;
+import com.zti.avlplan.AVLTimeline.Models.AVLTimeline;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

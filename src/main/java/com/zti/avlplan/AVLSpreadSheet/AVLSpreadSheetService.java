@@ -1,6 +1,6 @@
 package com.zti.avlplan.AVLSpreadSheet;
 
-import com.zti.avlplan.AVLItem.Repositories.AVLTimelineRepository;
+import com.zti.avlplan.AVLTimeline.Repositories.AVLTimelineRepository;
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheet;
 import com.zti.avlplan.AVLSpreadSheet.Repositories.AVLSpreadSheetRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,7 @@
-package com.zti.avlplan.AVLItem.Models;
+package com.zti.avlplan.AVLTimeline.Models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class AVLSpan {
     @Id
