@@ -2,61 +2,40 @@ package com.zti.avlplan.AVLItem.Models;
 
 import org.springframework.data.annotation.Id;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class AVLTimeline {
     @Id private String id;
-    private List<AVLSpan> AVLSpans;
-    private LocalDate dateFrom;
-    private LocalDate dateTo;
-    private LocalTime hourFrom;
-    private LocalTime hourTo;
+    private List<AVLSpan> avlSpans;
+    private LocalDateTime dateTimeFrom;
+    private LocalDateTime dateTimeTo;
     private String user;
 
-    public AVLTimeline(List<AVLSpan> AVLSpans, LocalDate dateFrom, LocalDate dateTo, LocalTime hourFrom, LocalTime hourTo, String user) {
-        this.AVLSpans = AVLSpans;
-        this.dateFrom = dateFrom;
-        this.dateTo = dateTo;
-        this.hourFrom = hourFrom;
-        this.hourTo = hourTo;
+    public AVLTimeline(List<AVLSpan> AVLSpans, LocalDateTime dateTimeFrom, LocalDateTime dateTimeTo, String user) {
+        this.avlSpans = AVLSpans;
+        this.dateTimeFrom = dateTimeFrom;
+        this.dateTimeTo = dateTimeTo;
         this.user = user;
     }
 
     public AVLTimeline() {
     }
 
-    public LocalTime getHourFrom() {
-        return hourFrom;
+    public LocalDateTime getDateTimeFrom() {
+        return dateTimeFrom;
     }
 
-    public void setHourFrom(LocalTime hourFrom) {
-        this.hourFrom = hourFrom;
+    public void setDateTimeFrom(LocalDateTime dateTimeFrom) {
+        this.dateTimeFrom = dateTimeFrom;
     }
 
-    public LocalTime getHourTo() {
-        return hourTo;
+    public LocalDateTime getDateTimeTo() {
+        return dateTimeTo;
     }
 
-    public void setHourTo(LocalTime hourTo) {
-        this.hourTo = hourTo;
-    }
-
-    public LocalDate getDateFrom() {
-        return dateFrom;
-    }
-
-    public void setDateFrom(LocalDate dateFrom) {
-        this.dateFrom = dateFrom;
-    }
-
-    public LocalDate getDateTo() {
-        return dateTo;
-    }
-
-    public void setDateTo(LocalDate dateTo) {
-        this.dateTo = dateTo;
+    public void setDateTimeTo(LocalDateTime dateTimeTo) {
+        this.dateTimeTo = dateTimeTo;
     }
 
     public String getId() {
@@ -64,11 +43,11 @@ public class AVLTimeline {
     }
 
     public List<AVLSpan> getAVLSpans() {
-        return AVLSpans;
+        return avlSpans;
     }
 
     public void setAVLSpans(List<AVLSpan> AVLSpans) {
-        this.AVLSpans = AVLSpans;
+        this.avlSpans = AVLSpans;
     }
 
     public String getUser() {
@@ -83,11 +62,9 @@ public class AVLTimeline {
     public String toString() {
         return "AVLTimeline{" +
                 "id='" + id + '\'' +
-                ", AVLSpans=" + AVLSpans +
-                ", dateFrom=" + dateFrom +
-                ", dateTo=" + dateTo +
-                ", hourFrom=" + hourFrom +
-                ", hourTo=" + hourTo +
+                ", AVLSpans=" + avlSpans +
+                ", dateFrom=" + dateTimeFrom +
+                ", dateTo=" + dateTimeTo +
                 ", user='" + user + '\'' +
                 '}';
     }

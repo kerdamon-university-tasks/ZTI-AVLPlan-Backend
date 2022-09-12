@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AVLTimelineRepository extends MongoRepository<AVLTimeline, String> {
+
 }

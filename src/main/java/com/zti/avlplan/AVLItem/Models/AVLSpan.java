@@ -10,11 +10,11 @@ public class AVLSpan {
     @Id
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    private LocalDateTime timeFrom;
-    private LocalDateTime timeTo;
+    private AVLTimelineCoordinates timeFrom;
+    private AVLTimelineCoordinates timeTo;
     private Integer availabilityType;
 
-    public AVLSpan(LocalDateTime timeFrom, LocalDateTime timeTo, Integer availabilityType) {
+    public AVLSpan(AVLTimelineCoordinates timeFrom, AVLTimelineCoordinates timeTo, Integer availabilityType) {
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
         this.availabilityType = availabilityType;
@@ -27,19 +27,19 @@ public class AVLSpan {
         return id;
     }
 
-    public LocalDateTime getTimeFrom() {
+    public AVLTimelineCoordinates getTimeFrom() {
         return timeFrom;
     }
 
-    public void setTimeFrom(LocalDateTime timeFrom) {
+    public void setTimeFrom(AVLTimelineCoordinates timeFrom) {
         this.timeFrom = timeFrom;
     }
 
-    public LocalDateTime getTimeTo() {
+    public AVLTimelineCoordinates getTimeTo() {
         return timeTo;
     }
 
-    public void setTimeTo(LocalDateTime timeTo) {
+    public void setTimeTo(AVLTimelineCoordinates timeTo) {
         this.timeTo = timeTo;
     }
 
