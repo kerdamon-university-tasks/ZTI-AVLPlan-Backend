@@ -1,6 +1,7 @@
 package com.zti.avlplan.AVLSpreadSheet;
 
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheetDTO;
+import com.zti.avlplan.AVLTimeline.Exceptions.TimelineNotFoundException;
 import com.zti.avlplan.AVLTimeline.Models.AVLTimeline;
 import com.zti.avlplan.AVLTimeline.Repositories.AVLTimelineRepository;
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheet;
@@ -38,9 +39,13 @@ public class AVLSpreadSheetService {
         avlSpreadSheetRepository.save(avlSpreadSheet);
     }
 
-    public void generateNewAvlSpreadSheet() {
-        var avlTimelines = List.of(avlTimelineRepository.findById("631ea77bf6dc7f112c58a891").get(), avlTimelineRepository.findById("631ea885f6dc7f112c58a893").get());
-        var avlSpreadSheet = new AVLSpreadSheet(avlTimelines, "Test Event");
-        avlSpreadSheetRepository.save(avlSpreadSheet);
+    public void addTimelineToSpreadSheet(String id, AVLTimeline avlTimeline) {
+        var result = avlSpreadSheetRepository.findById(id);
+        if(result.isEmpty())
+            throw new TimelineNotFoundException();
+        var spreadSheet = result.get();
+        var returned = avlTimelineRepository.save(avlTimeline);
+        spreadSheet.getAVLTimelines().add(returned);
+        avlSpreadSheetRepository.save(spreadSheet);
     }
 }

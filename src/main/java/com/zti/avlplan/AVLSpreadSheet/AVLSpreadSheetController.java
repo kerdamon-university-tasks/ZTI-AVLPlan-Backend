@@ -3,6 +3,7 @@ package com.zti.avlplan.AVLSpreadSheet;
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheet;
 import com.zti.avlplan.AVLSpreadSheet.Exceptions.SpreadSheetNotFoundException;
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheetDTO;
+import com.zti.avlplan.AVLTimeline.Models.AVLTimeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,14 +35,13 @@ public class AVLSpreadSheetController {
         return spreadSheet;
     }
 
-    @GetMapping("/add-spreadsheet")
-    public String getAVLSpreadSheetById(){
-        avlSpreadSheetService.generateNewAvlSpreadSheet();
-        return "Done";
+    @PostMapping("/spreadsheet")
+    public void postSpreadSheet(@RequestBody AVLSpreadSheetDTO avlSpreadSheetDTO){
+        avlSpreadSheetService.addNewAvlSpreadSheet(avlSpreadSheetDTO);
     }
 
-    @PostMapping("/spreadsheet")
-    public void postSpreadSheet(@RequestBody AVLSpreadSheetDTO avlSpreadSheet){
-        avlSpreadSheetService.addNewAvlSpreadSheet(avlSpreadSheet);
+    @PostMapping("/spreadsheet/{id}/timeline")
+    public void patchSpreadSheet(@PathVariable String id, @RequestBody AVLTimeline avlTimeline){
+        avlSpreadSheetService.addTimelineToSpreadSheet(id, avlTimeline);
     }
 }
