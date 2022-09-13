@@ -13,12 +13,14 @@ public class AVLSpreadSheet {
     private String id;
     @DocumentReference
     private List<AVLTimeline> AVLTimelines;
-
-    public AVLSpreadSheet(List<AVLTimeline> AVLTimelines) {
-        this.AVLTimelines = AVLTimelines;
-    }
+    private String eventName;
 
     public AVLSpreadSheet() {
+    }
+
+    public AVLSpreadSheet(List<AVLTimeline> AVLTimelines, String eventName) {
+        this.AVLTimelines = AVLTimelines;
+        this.eventName = eventName;
     }
 
     public String getId() {

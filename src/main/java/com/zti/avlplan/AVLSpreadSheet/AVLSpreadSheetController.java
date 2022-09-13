@@ -2,6 +2,7 @@ package com.zti.avlplan.AVLSpreadSheet;
 
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheet;
 import com.zti.avlplan.AVLSpreadSheet.Exceptions.SpreadSheetNotFoundException;
+import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +41,7 @@ public class AVLSpreadSheetController {
     }
 
     @PostMapping("/spreadsheet")
-    public void postSpreadSheet(@RequestBody AVLSpreadSheet avlSpreadSheet){
+    public void postSpreadSheet(@RequestBody AVLSpreadSheetDTO avlSpreadSheet){
         avlSpreadSheetService.addNewAvlSpreadSheet(avlSpreadSheet);
     }
 }
