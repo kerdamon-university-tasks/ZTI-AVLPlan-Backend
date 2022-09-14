@@ -32,9 +32,4 @@ public class AVLTimelineController {
         }
         return timeline;
     }
-
-    @PostMapping("/timeline")
-    public void postTimeline(@RequestBody AVLTimeline avlTimeline){
-        avlTimelineService.addNewAvlTimeline(avlTimeline);
-    }
 }
