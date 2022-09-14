@@ -1,5 +1,6 @@
 package com.zti.avlplan.AVLSpreadSheet;
 
+import com.zti.avlplan.AVLSpreadSheet.Exceptions.SpreadSheetNotFoundException;
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheetDTO;
 import com.zti.avlplan.AVLTimeline.Exceptions.TimelineNotFoundException;
 import com.zti.avlplan.AVLTimeline.Models.AVLTimeline;
@@ -44,7 +45,7 @@ public class AVLSpreadSheetService {
     public void addTimelineToSpreadSheet(String id, AVLTimeline avlTimeline) {
         var result = avlSpreadSheetRepository.findById(id);
         if(result.isEmpty())
-            throw new TimelineNotFoundException();
+            throw new SpreadSheetNotFoundException();
         var spreadSheet = result.get();
         var returned = avlTimelineRepository.save(avlTimeline);
         spreadSheet.getAVLTimelines().add(returned);

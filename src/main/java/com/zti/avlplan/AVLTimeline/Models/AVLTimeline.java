@@ -8,34 +8,14 @@ import java.util.List;
 public class AVLTimeline {
     @Id private String id;
     private List<AVLSpan> avlSpans;
-    private LocalDateTime dateTimeFrom;
-    private LocalDateTime dateTimeTo;
     private String user;
 
-    public AVLTimeline(List<AVLSpan> AVLSpans, LocalDateTime dateTimeFrom, LocalDateTime dateTimeTo, String user) {
+    public AVLTimeline(List<AVLSpan> AVLSpans, String user) {
         this.avlSpans = AVLSpans;
-        this.dateTimeFrom = dateTimeFrom;
-        this.dateTimeTo = dateTimeTo;
         this.user = user;
     }
 
     public AVLTimeline() {
-    }
-
-    public LocalDateTime getDateTimeFrom() {
-        return dateTimeFrom;
-    }
-
-    public void setDateTimeFrom(LocalDateTime dateTimeFrom) {
-        this.dateTimeFrom = dateTimeFrom;
-    }
-
-    public LocalDateTime getDateTimeTo() {
-        return dateTimeTo;
-    }
-
-    public void setDateTimeTo(LocalDateTime dateTimeTo) {
-        this.dateTimeTo = dateTimeTo;
     }
 
     public String getId() {
@@ -63,8 +43,6 @@ public class AVLTimeline {
         return "AVLTimeline{" +
                 "id='" + id + '\'' +
                 ", AVLSpans=" + avlSpans +
-                ", dateFrom=" + dateTimeFrom +
-                ", dateTo=" + dateTimeTo +
                 ", user='" + user + '\'' +
                 '}';
     }
