@@ -9,12 +9,10 @@ public class AVLSpan {
     private String id;
     private AVLTimelineCoordinates timeFrom;
     private AVLTimelineCoordinates timeTo;
-    private Integer availabilityType;
 
-    public AVLSpan(AVLTimelineCoordinates timeFrom, AVLTimelineCoordinates timeTo, Integer availabilityType) {
+    public AVLSpan(AVLTimelineCoordinates timeFrom, AVLTimelineCoordinates timeTo) {
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
-        this.availabilityType = availabilityType;
     }
 
     public AVLSpan() {
@@ -40,21 +38,12 @@ public class AVLSpan {
         this.timeTo = timeTo;
     }
 
-    public Integer getAvailabilityType() {
-        return availabilityType;
-    }
-
-    public void setAvailabilityType(Integer availabilityType) {
-        this.availabilityType = availabilityType;
-    }
-
     @Override
     public String toString() {
         return "AVLSpan{" +
                 "id='" + id + '\'' +
                 ", timeFrom=" + timeFrom +
                 ", timeTo=" + timeTo +
-                ", availabilityType=" + availabilityType +
                 '}';
     }
 }
