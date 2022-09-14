@@ -36,8 +36,8 @@ public class AVLSpreadSheetController {
     }
 
     @PostMapping("/spreadsheet")
-    public void postSpreadSheet(@RequestBody AVLSpreadSheetDTO avlSpreadSheetDTO){
-        avlSpreadSheetService.addNewAvlSpreadSheet(avlSpreadSheetDTO);
+    public String postSpreadSheet(@RequestBody AVLSpreadSheetDTO avlSpreadSheetDTO){
+        return avlSpreadSheetService.addNewAvlSpreadSheet(avlSpreadSheetDTO);
     }
 
     @PostMapping("/spreadsheet/{id}/timeline")

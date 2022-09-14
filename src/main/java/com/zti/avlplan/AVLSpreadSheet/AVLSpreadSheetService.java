@@ -9,6 +9,7 @@ import com.zti.avlplan.AVLSpreadSheet.Repositories.AVLSpreadSheetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,11 +33,12 @@ public class AVLSpreadSheetService {
         return avlSpreadSheetRepository.findById(id);
     }
 
-    public void addNewAvlSpreadSheet(AVLSpreadSheetDTO avlSpreadSheetDTO) {
+    public String addNewAvlSpreadSheet(AVLSpreadSheetDTO avlSpreadSheetDTO) {
         List<AVLTimeline> avlTimelines = new ArrayList<>();
         avlTimelineRepository.findAllById(avlSpreadSheetDTO.getAVLTimelineIds()).forEach(avlTimelines::add);
         var avlSpreadSheet = new AVLSpreadSheet(avlTimelines, avlSpreadSheetDTO.getEventName(), avlSpreadSheetDTO.getDateTimeFrom(), avlSpreadSheetDTO.getDateTimeTo());
-        avlSpreadSheetRepository.save(avlSpreadSheet);
+        var createdAVLSpreadSheet = avlSpreadSheetRepository.save(avlSpreadSheet);
+        return createdAVLSpreadSheet.getId();
     }
 
     public void addTimelineToSpreadSheet(String id, AVLTimeline avlTimeline) {
