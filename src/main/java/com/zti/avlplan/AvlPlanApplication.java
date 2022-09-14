@@ -24,15 +24,15 @@ public class AvlPlanApplication {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    CommandLineRunner run(UserService userService){
-        return args -> {
-//            userService.saveRole(new Role("ROLE_USER"));
+//    @Bean
+//    CommandLineRunner run(UserService userService){
+//        return args -> {
+////            userService.saveRole(new Role("ROLE_USER"));
+////
+////            userService.saveUser(new AppUser("John Doe", "doe", "123", new ArrayList<>()));
 //
-//            userService.saveUser(new AppUser("John Doe", "doe", "123", new ArrayList<>()));
-
-//            userService.addRoleToUser("doe", "ROLE_USER");
-        };
-    }
+////            userService.addRoleToUser("doe", "ROLE_USER");
+//        };
+//    }
 
 }
