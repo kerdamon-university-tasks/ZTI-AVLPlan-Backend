@@ -1,6 +1,6 @@
-package com.zti.avlplan.Authorisation.Repositories;
+package com.zti.avlplan.Authentication.Repositories;
 
-import com.zti.avlplan.Authorisation.Domain.AppUser;
+import com.zti.avlplan.Authentication.Domain.AppUser;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
-package com.zti.avlplan.Authorisation.Api;
+package com.zti.avlplan.Authentication.Api;
 
-import com.zti.avlplan.Authorisation.Domain.AppUser;
-import com.zti.avlplan.Authorisation.Domain.Role;
-import com.zti.avlplan.Authorisation.Services.UserService;
+import com.zti.avlplan.Authentication.Domain.AppUser;
+import com.zti.avlplan.Authentication.Domain.Role;
+import com.zti.avlplan.Authentication.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

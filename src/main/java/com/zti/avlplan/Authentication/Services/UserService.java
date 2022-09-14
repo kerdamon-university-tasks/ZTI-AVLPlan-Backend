@@ -1,9 +1,9 @@
-package com.zti.avlplan.Authorisation.Services;
+package com.zti.avlplan.Authentication.Services;
 
-import com.zti.avlplan.Authorisation.Domain.AppUser;
-import com.zti.avlplan.Authorisation.Domain.Role;
-import com.zti.avlplan.Authorisation.Repositories.RoleRepository;
-import com.zti.avlplan.Authorisation.Repositories.UserRepository;
+import com.zti.avlplan.Authentication.Domain.AppUser;
+import com.zti.avlplan.Authentication.Domain.Role;
+import com.zti.avlplan.Authentication.Repositories.RoleRepository;
+import com.zti.avlplan.Authentication.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

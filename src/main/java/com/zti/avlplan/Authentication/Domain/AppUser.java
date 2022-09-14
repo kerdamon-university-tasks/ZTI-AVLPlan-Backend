@@ -1,4 +1,4 @@
-package com.zti.avlplan.Authorisation.Domain;
+package com.zti.avlplan.Authentication.Domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
