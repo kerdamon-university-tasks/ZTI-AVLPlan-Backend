@@ -50,28 +50,34 @@ public class UserService implements IUserService, UserDetailsService {
     @Override
     public AppUser saveUser(AppUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        log.info("Saving user {} to db", user.getUsername());
         return userRepository.save(user);
     }
 
     @Override
     public Role saveRole(Role role) {
+        log.info("Saving role {} to db", role.getName());
         return roleRepository.save(role);
     }
 
     @Override
     public void addRoleToUser(String username, String roleName) {
+        log.info("Adding role {} to user {}", roleName, username);
         AppUser user = userRepository.findByUsername(username);
         Role role = roleRepository.findByName(roleName);
         user.getRoles().add(role);
+        userRepository.save(user);
     }
 
     @Override
     public AppUser getUser(String username) {
+        log.info("Fetching user {}", username);
         return userRepository.findByUsername(username);
     }
 
     @Override
     public List<AppUser> getUsers() {
+        log.info("Fetching all users ");
         return userRepository.findAll();
     }
 
