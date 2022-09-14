@@ -4,6 +4,7 @@ import com.zti.avlplan.Authentication.Domain.AppUser;
 import com.zti.avlplan.Authentication.Domain.Role;
 import com.zti.avlplan.Authentication.Repositories.RoleRepository;
 import com.zti.avlplan.Authentication.Repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Service @Transactional
+@Service @Transactional @Slf4j
 public class UserService implements IUserService, UserDetailsService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -36,6 +37,8 @@ public class UserService implements IUserService, UserDetailsService {
         AppUser user = userRepository.findByUsername(username);
         if(user == null){
             throw new UsernameNotFoundException("User not found in the database");
+        } else {
+            log.info("User found in the database: {}", username);
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {
