@@ -36,7 +36,6 @@ public class AVLSpreadSheetService {
 
     public String addNewAvlSpreadSheet(AVLSpreadSheetDTO avlSpreadSheetDTO) {
         List<AVLTimeline> avlTimelines = new ArrayList<>();
-        avlTimelineRepository.findAllById(avlSpreadSheetDTO.getAVLTimelineIds()).forEach(avlTimelines::add);
         var avlSpreadSheet = new AVLSpreadSheet(avlTimelines, avlSpreadSheetDTO.getEventName(), avlSpreadSheetDTO.getDateTimeFrom(), avlSpreadSheetDTO.getDateTimeTo());
         var createdAVLSpreadSheet = avlSpreadSheetRepository.save(avlSpreadSheet);
         return createdAVLSpreadSheet.getId();

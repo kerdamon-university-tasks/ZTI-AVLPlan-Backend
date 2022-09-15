@@ -1,4 +1,4 @@
-package com.zti.avlplan.Authentication.Filter;
+package com.zti.avlplan.AuthenticationOld.Filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -37,7 +37,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         log.info("In attemptAuthentication username is {}", username);
-        log.info("In attemptAuthentication username is {}", password);
+        log.info("In attemptAuthentication password is {}", password);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
         return authenticationManager.authenticate(authenticationToken);
     }

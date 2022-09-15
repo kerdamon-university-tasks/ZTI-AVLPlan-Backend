@@ -1,9 +1,9 @@
-package com.zti.avlplan.Authentication.Services;
+package com.zti.avlplan.AuthenticationOld.Services;
 
-import com.zti.avlplan.Authentication.Domain.AppUser;
-import com.zti.avlplan.Authentication.Domain.Role;
-import com.zti.avlplan.Authentication.Repositories.RoleRepository;
-import com.zti.avlplan.Authentication.Repositories.UserRepository;
+import com.zti.avlplan.AuthenticationOld.Domain.AppUser;
+import com.zti.avlplan.AuthenticationOld.Domain.Role;
+import com.zti.avlplan.AuthenticationOld.Repositories.RoleRepository;
+import com.zti.avlplan.AuthenticationOld.Repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

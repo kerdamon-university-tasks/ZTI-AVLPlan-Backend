@@ -1,7 +1,7 @@
-package com.zti.avlplan.Authentication.Services;
+package com.zti.avlplan.AuthenticationOld.Services;
 
-import com.zti.avlplan.Authentication.Domain.AppUser;
-import com.zti.avlplan.Authentication.Domain.Role;
+import com.zti.avlplan.AuthenticationOld.Domain.AppUser;
+import com.zti.avlplan.AuthenticationOld.Domain.Role;
 
 import java.util.List;
 
