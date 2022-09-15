@@ -50,10 +50,12 @@ public class AuthenticationService {
 
     public boolean isTokenValid(String token){
         try{
+            token = token.substring("Bearer ".length());
             Algorithm algorithm = Algorithm.HMAC256("secret");
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(token);
         } catch (JWTVerificationException e) {
+            log.error("{}", e);
             return false;
         }
         return true;
