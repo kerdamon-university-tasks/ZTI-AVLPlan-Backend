@@ -30,8 +30,12 @@ public class AVLSpreadSheetService {
         return avlSpreadSheetRepository.findAll();
     }
 
-    public Optional<AVLSpreadSheet> getSpreadSheetByID(String id){
-        return avlSpreadSheetRepository.findById(id);
+    public AVLSpreadSheet getSpreadSheetByID(String id){
+        var spreadSheet = avlSpreadSheetRepository.findById(id);
+        if(spreadSheet.isEmpty()){
+            throw new SpreadSheetNotFoundException();
+        }
+        return spreadSheet.get();
     }
 
     public String addNewAvlSpreadSheet(AVLSpreadSheetDTO avlSpreadSheetDTO) {

@@ -27,12 +27,8 @@ public class AVLSpreadSheetController {
     }
 
     @GetMapping("/spreadsheet/{id}")
-    public Optional<AVLSpreadSheet> getAVLSpreadSheetById(@PathVariable String id){
-        var spreadSheet = avlSpreadSheetService.getSpreadSheetByID(id);
-        if(spreadSheet.isEmpty()){
-            throw new SpreadSheetNotFoundException();
-        }
-        return spreadSheet;
+    public AVLSpreadSheet getAVLSpreadSheetById(@PathVariable String id){
+        return avlSpreadSheetService.getSpreadSheetByID(id);
     }
 
     @PostMapping("/spreadsheet")
