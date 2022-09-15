@@ -4,8 +4,12 @@ import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheet;
 import com.zti.avlplan.AVLSpreadSheet.Exceptions.SpreadSheetNotFoundException;
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheetDTO;
 import com.zti.avlplan.AVLTimeline.Models.AVLTimeline;
+import com.zti.avlplan.Authentication.AuthenticationService;
+import com.zti.avlplan.Authentication.Exceptions.UnauthorizedException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,32 +19,40 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/v1/avlitem")
 @Slf4j
+@RequiredArgsConstructor
 public class AVLSpreadSheetController {
     private final AVLSpreadSheetService avlSpreadSheetService;
-
-    @Autowired
-    public AVLSpreadSheetController(AVLSpreadSheetService avlSpreadSheetService) {
-        this.avlSpreadSheetService = avlSpreadSheetService;
-    }
+    private final AuthenticationService authenticationService;
 
     @GetMapping("/spreadsheets")
-    public List<AVLSpreadSheet> getAVLSpreadSheets(){
+    public List<AVLSpreadSheet> getAVLSpreadSheets(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader){
+        if(!authenticationService.isTokenValid(authorizationHeader)){
+            throw new UnauthorizedException();
+        }
         return avlSpreadSheetService.getAVLSpreadSheets();
     }
 
     @GetMapping("/spreadsheet/{id}")
-    public AVLSpreadSheet getAVLSpreadSheetById(@PathVariable String id){
-        log.info("sending spreadshhet {}", id);
+    public AVLSpreadSheet getAVLSpreadSheetById(@PathVariable String id, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader){
+        if(!authenticationService.isTokenValid(authorizationHeader)){
+            throw new UnauthorizedException();
+        }
         return avlSpreadSheetService.getSpreadSheetByID(id);
     }
 
     @PostMapping("/spreadsheet")
-    public String postSpreadSheet(@RequestBody AVLSpreadSheetDTO avlSpreadSheetDTO){
+    public String postSpreadSheet(@RequestBody AVLSpreadSheetDTO avlSpreadSheetDTO, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader){
+        if(!authenticationService.isTokenValid(authorizationHeader)){
+            throw new UnauthorizedException();
+        }
         return avlSpreadSheetService.addNewAvlSpreadSheet(avlSpreadSheetDTO);
     }
 
     @PostMapping("/spreadsheet/{id}/timeline")
-    public void patchSpreadSheet(@PathVariable String id, @RequestBody AVLTimeline avlTimeline){
+    public void patchSpreadSheet(@PathVariable String id, @RequestBody AVLTimeline avlTimeline, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader){
+        if(!authenticationService.isTokenValid(authorizationHeader)){
+            throw new UnauthorizedException();
+        }
         avlSpreadSheetService.addTimelineToSpreadSheet(id, avlTimeline);
     }
 }

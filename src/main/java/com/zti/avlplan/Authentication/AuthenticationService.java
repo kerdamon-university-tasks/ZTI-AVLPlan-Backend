@@ -3,7 +3,9 @@ package com.zti.avlplan.Authentication;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.zti.avlplan.Authentication.Exceptions.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,14 +48,14 @@ public class AuthenticationService {
                 .sign(algorithm);
     }
 
-    public void validateToken(String token){
+    public boolean isTokenValid(String token){
         try{
             Algorithm algorithm = Algorithm.HMAC256("secret");
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(token);
-        } catch (Exception e) {
-            throw new RuntimeException("Wrong Token: " + e.getMessage());
+        } catch (JWTVerificationException e) {
+            return false;
         }
-
+        return true;
     }
 }
