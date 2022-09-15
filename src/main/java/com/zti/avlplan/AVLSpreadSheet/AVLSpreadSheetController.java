@@ -45,7 +45,9 @@ public class AVLSpreadSheetController {
         if(!authenticationService.isTokenValid(authorizationHeader)){
             throw new UnauthorizedException();
         }
-        return avlSpreadSheetService.addNewAvlSpreadSheet(avlSpreadSheetDTO);
+        var returned = avlSpreadSheetService.addNewAvlSpreadSheet(avlSpreadSheetDTO);
+        log.info("returned id spreadsheet {}", returned);
+        return returned;
     }
 
     @PostMapping("/spreadsheet/{id}/timeline")

@@ -28,7 +28,6 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public void register(@RequestBody LoginDTO registerData){
-        log.info("loginData {}", registerData.getUsername());
         var user = new User(registerData.getUsername(), registerData.getPassword());
         authenticationService.registerNewUser(user);
     }

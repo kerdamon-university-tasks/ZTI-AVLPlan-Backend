@@ -55,7 +55,7 @@ public class AuthenticationService {
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(token);
         } catch (JWTVerificationException e) {
-            log.error("{}", e);
+            log.error("Error: {}", e);
             return false;
         }
         return true;
