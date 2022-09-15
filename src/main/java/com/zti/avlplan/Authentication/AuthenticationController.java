@@ -23,13 +23,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public String login(@RequestBody LoginDTO loginData){
-        log.info("loginData {}", loginData.getUsername());
-        var user = authenticationService.getUserByUsername(loginData.getUsername());
-        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-        return JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000))
-                .sign(algorithm);
+        return authenticationService.login(loginData.getUsername(), loginData.getPassword());
     }
 
     @PostMapping("/register")

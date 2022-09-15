@@ -1,9 +1,18 @@
 package com.zti.avlplan.Authentication;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.Objects;
+
 @Service
+@Slf4j
 public class AuthenticationService {
     final private AuthenticationRepository authenticationRepository;
 
@@ -22,5 +31,29 @@ public class AuthenticationService {
 
     public void registerNewUser(User user){
         authenticationRepository.save(user);
+    }
+
+    public String login(String username, String password){
+        var user = getUserByUsername(username);
+        if(!Objects.equals(password, user.getPassword())){
+            log.error("Wrong password. Was {}, should be {}", password, user.getPassword());
+            throw new RuntimeException("Wrong Password!");
+        }
+        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+        return JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000))
+                .sign(algorithm);
+    }
+
+    public void validateToken(String token){
+        try{
+            Algorithm algorithm = Algorithm.HMAC256("secret");
+            JWTVerifier verifier = JWT.require(algorithm).build();
+            DecodedJWT decodedJWT = verifier.verify(token);
+        } catch (Exception e) {
+            throw new RuntimeException("Wrong Token: " + e.getMessage());
+        }
+
     }
 }

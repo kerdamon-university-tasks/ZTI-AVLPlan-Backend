@@ -4,6 +4,7 @@ import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheet;
 import com.zti.avlplan.AVLSpreadSheet.Exceptions.SpreadSheetNotFoundException;
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheetDTO;
 import com.zti.avlplan.AVLTimeline.Models.AVLTimeline;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 @CrossOrigin
 @RestController
 @RequestMapping("api/v1/avlitem")
+@Slf4j
 public class AVLSpreadSheetController {
     private final AVLSpreadSheetService avlSpreadSheetService;
 
@@ -28,6 +30,7 @@ public class AVLSpreadSheetController {
 
     @GetMapping("/spreadsheet/{id}")
     public AVLSpreadSheet getAVLSpreadSheetById(@PathVariable String id){
+        log.info("sending spreadshhet {}", id);
         return avlSpreadSheetService.getSpreadSheetByID(id);
     }
 
