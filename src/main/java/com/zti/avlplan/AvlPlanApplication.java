@@ -10,20 +10,4 @@ public class AvlPlanApplication {
         SpringApplication.run(AvlPlanApplication.class, args);
     }
 
-//    @Bean
-//    PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
-
-//    @Bean
-//    CommandLineRunner run(UserService userService){
-//        return args -> {
-////            userService.saveRole(new Role("ROLE_USER"));
-////
-////            userService.saveUser(new AppUser("John Doe", "doe", "123", new ArrayList<>()));
-//
-////            userService.addRoleToUser("doe", "ROLE_USER");
-//        };
-//    }
-
 }
