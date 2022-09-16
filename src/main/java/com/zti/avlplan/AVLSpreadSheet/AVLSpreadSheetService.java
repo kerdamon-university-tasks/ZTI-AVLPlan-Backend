@@ -48,24 +48,24 @@ public class AVLSpreadSheetService {
         return createdAVLSpreadSheet.getId();
     }
 
-    public void addTimelineToSpreadSheet(String id, String username, AVLTimeline avlTimeline) {
+    public void addTimelineToSpreadSheet(String id, AVLTimeline avlTimeline) {
         var result = avlSpreadSheetRepository.findById(id);
         if(result.isEmpty())
             throw new SpreadSheetNotFoundException();
         var spreadSheet = result.get();
-        if(spreadSheet.getAVLTimelines().stream().anyMatch(timeline -> Objects.equals(timeline.getUser(), username)))
+        if(spreadSheet.getAVLTimelines().stream().anyMatch(timeline -> Objects.equals(timeline.getUser(), avlTimeline.getUser())))
             throw new DuplicateTimelinesException();
         var returned = avlTimelineRepository.save(avlTimeline);
         spreadSheet.getAVLTimelines().add(returned);
         avlSpreadSheetRepository.save(spreadSheet);
     }
 
-    public void editTimelineInSpreadSheet(String id, String username, AVLTimeline newTimeline) {
+    public void editTimelineInSpreadSheet(String id, AVLTimeline newTimeline) {
         var result = avlSpreadSheetRepository.findById(id);
         if(result.isEmpty())
             throw new SpreadSheetNotFoundException();
         var spreadSheet = result.get();
-        var otimeline = spreadSheet.getAVLTimelines().stream().filter(timeline -> Objects.equals(timeline.getUser(), username)).findFirst();
+        var otimeline = spreadSheet.getAVLTimelines().stream().filter(timeline -> Objects.equals(timeline.getUser(), newTimeline.getUser())).findFirst();
         if(otimeline.isEmpty())
             throw new MissingTimelineException();
         var timeline = otimeline.get();

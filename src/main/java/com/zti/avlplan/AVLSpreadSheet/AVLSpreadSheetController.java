@@ -55,8 +55,7 @@ public class AVLSpreadSheetController {
         if(!authenticationService.isTokenValid(authorizationHeader)){
             throw new UnauthorizedException();
         }
-        var username = authenticationService.getUserFromToken(authorizationHeader);
-        avlSpreadSheetService.addTimelineToSpreadSheet(id, username, avlTimeline);
+        avlSpreadSheetService.addTimelineToSpreadSheet(id, avlTimeline);
     }
 
     @PutMapping("/spreadsheet/{id}/timeline")
@@ -64,7 +63,6 @@ public class AVLSpreadSheetController {
         if(!authenticationService.isTokenValid(authorizationHeader)){
             throw new UnauthorizedException();
         }
-        var username = authenticationService.getUserFromToken(authorizationHeader);
-        avlSpreadSheetService.editTimelineInSpreadSheet(id, username, avlTimeline);
+        avlSpreadSheetService.editTimelineInSpreadSheet(id, avlTimeline);
     }
 }
