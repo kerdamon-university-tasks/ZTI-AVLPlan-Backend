@@ -1,6 +1,7 @@
 package com.zti.avlplan.AVLSpreadSheet;
 
 import com.zti.avlplan.AVLSpreadSheet.Exceptions.DuplicateTimelinesException;
+import com.zti.avlplan.AVLSpreadSheet.Exceptions.MissingTimelineException;
 import com.zti.avlplan.AVLSpreadSheet.Exceptions.SpreadSheetNotFoundException;
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheetDTO;
 import com.zti.avlplan.AVLTimeline.Exceptions.TimelineNotFoundException;
@@ -55,6 +56,22 @@ public class AVLSpreadSheetService {
         if(spreadSheet.getAVLTimelines().stream().anyMatch(timeline -> Objects.equals(timeline.getUser(), username)))
             throw new DuplicateTimelinesException();
         var returned = avlTimelineRepository.save(avlTimeline);
+        spreadSheet.getAVLTimelines().add(returned);
+        avlSpreadSheetRepository.save(spreadSheet);
+    }
+
+    public void editTimelineInSpreadSheet(String id, String username, AVLTimeline newTimeline) {
+        var result = avlSpreadSheetRepository.findById(id);
+        if(result.isEmpty())
+            throw new SpreadSheetNotFoundException();
+        var spreadSheet = result.get();
+        var otimeline = spreadSheet.getAVLTimelines().stream().filter(timeline -> Objects.equals(timeline.getUser(), username)).findFirst();
+        if(otimeline.isEmpty())
+            throw new MissingTimelineException();
+        var timeline = otimeline.get();
+        timeline.setAVLSpans(newTimeline.getAVLSpans());
+        timeline.setUser(newTimeline.getUser());
+        var returned = avlTimelineRepository.save(timeline);
         spreadSheet.getAVLTimelines().add(returned);
         avlSpreadSheetRepository.save(spreadSheet);
     }

@@ -58,4 +58,13 @@ public class AVLSpreadSheetController {
         var username = authenticationService.getUserFromToken(authorizationHeader);
         avlSpreadSheetService.addTimelineToSpreadSheet(id, username, avlTimeline);
     }
+
+    @PutMapping("/spreadsheet/{id}/timeline")
+    public void editTimelineInSpreadSheet(@PathVariable String id, @RequestBody AVLTimeline avlTimeline, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader){
+        if(!authenticationService.isTokenValid(authorizationHeader)){
+            throw new UnauthorizedException();
+        }
+        var username = authenticationService.getUserFromToken(authorizationHeader);
+        avlSpreadSheetService.editTimelineInSpreadSheet(id, username, avlTimeline);
+    }
 }

@@ -8,4 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
         reason = "Timeline created by this user already exists in this spreadsheet"
 )
 public class DuplicateTimelinesException extends RuntimeException{
+    public DuplicateTimelinesException() {
+        super();
+    }
 }
