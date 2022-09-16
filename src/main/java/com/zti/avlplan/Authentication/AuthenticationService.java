@@ -7,6 +7,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.zti.avlplan.Authentication.Exceptions.AlreadyExistsException;
 import com.zti.avlplan.Authentication.Exceptions.UserNotFoundException;
+import com.zti.avlplan.Authentication.Exceptions.WrongPasswordException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class AuthenticationService {
         var user = getUserByUsername(username);
         if(!Objects.equals(password, user.getPassword())){
             log.error("Wrong password. Was {}, should be {}", password, user.getPassword());
-            throw new RuntimeException("Wrong Password!");
+            throw new WrongPasswordException();
         }
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
         return JWT.create()
