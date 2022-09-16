@@ -1,5 +1,6 @@
 package com.zti.avlplan.AVLSpreadSheet;
 
+import com.zti.avlplan.AVLSpreadSheet.Exceptions.DuplicateTimelinesException;
 import com.zti.avlplan.AVLSpreadSheet.Exceptions.SpreadSheetNotFoundException;
 import com.zti.avlplan.AVLSpreadSheet.Models.AVLSpreadSheetDTO;
 import com.zti.avlplan.AVLTimeline.Exceptions.TimelineNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -45,11 +47,13 @@ public class AVLSpreadSheetService {
         return createdAVLSpreadSheet.getId();
     }
 
-    public void addTimelineToSpreadSheet(String id, AVLTimeline avlTimeline) {
+    public void addTimelineToSpreadSheet(String id, String username, AVLTimeline avlTimeline) {
         var result = avlSpreadSheetRepository.findById(id);
         if(result.isEmpty())
             throw new SpreadSheetNotFoundException();
         var spreadSheet = result.get();
+        if(spreadSheet.getAVLTimelines().stream().anyMatch(timeline -> Objects.equals(timeline.getUser(), username)))
+            throw new DuplicateTimelinesException();
         var returned = avlTimelineRepository.save(avlTimeline);
         spreadSheet.getAVLTimelines().add(returned);
         avlSpreadSheetRepository.save(spreadSheet);

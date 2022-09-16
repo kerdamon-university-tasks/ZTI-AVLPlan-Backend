@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AVLSpreadSheet {
     @Id
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+//    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
     @DocumentReference
     private List<AVLTimeline> AVLTimelines;

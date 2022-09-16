@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.zti.avlplan.Authentication.Exceptions.AlreadyExistsException;
 import com.zti.avlplan.Authentication.Exceptions.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,12 @@ public class AuthenticationService {
         return user.get();
     }
 
-    public void registerNewUser(User user){
-        authenticationRepository.save(user);
+    public void registerNewUser(User newUser){
+        var user = authenticationRepository.findByUsername(newUser.getUsername());
+        if(user.isPresent()){
+            throw new AlreadyExistsException();
+        }
+        authenticationRepository.save(newUser);
     }
 
     public String login(String username, String password){
@@ -54,10 +59,24 @@ public class AuthenticationService {
             Algorithm algorithm = Algorithm.HMAC256("secret");
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(token);
+            String username = decodedJWT.getSubject();
         } catch (JWTVerificationException e) {
             log.error("Error: {}", e);
             return false;
         }
         return true;
+    }
+
+    public String getUserFromToken(String token){
+        try{
+            token = token.substring("Bearer ".length());
+            Algorithm algorithm = Algorithm.HMAC256("secret");
+            JWTVerifier verifier = JWT.require(algorithm).build();
+            DecodedJWT decodedJWT = verifier.verify(token);
+            return decodedJWT.getSubject();
+        } catch (JWTVerificationException e) {
+            log.error("Error: {}", e);
+        }
+        return "";
     }
 }

@@ -51,10 +51,11 @@ public class AVLSpreadSheetController {
     }
 
     @PostMapping("/spreadsheet/{id}/timeline")
-    public void patchSpreadSheet(@PathVariable String id, @RequestBody AVLTimeline avlTimeline, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader){
+    public void postTimelineToSpreadSheet(@PathVariable String id, @RequestBody AVLTimeline avlTimeline, @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader){
         if(!authenticationService.isTokenValid(authorizationHeader)){
             throw new UnauthorizedException();
         }
-        avlSpreadSheetService.addTimelineToSpreadSheet(id, avlTimeline);
+        var username = authenticationService.getUserFromToken(authorizationHeader);
+        avlSpreadSheetService.addTimelineToSpreadSheet(id, username, avlTimeline);
     }
 }
